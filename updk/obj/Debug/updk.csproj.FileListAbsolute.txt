@@ -1,0 +1,22 @@
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\bin\Debug\updk.exe.config
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\bin\Debug\updk.exe
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\bin\Debug\updk.pdb
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.csprojResolveAssemblyReference.cache
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.connectionStringForm.resources
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.MainForm.resources
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.Properties.Resources.resources
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.csproj.GenerateResource.Cache
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.exe
+c:\users\ilya panysh\documents\visual studio 2013\Projects\updk\updk\obj\Debug\updk.pdb
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.connectionStringForm.resources
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.MainForm.resources
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.Properties.Resources.resources
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.csproj.GenerateResource.Cache
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.csproj.CoreCompileInputs.cache
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.exe
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.pdb
+C:\Users\panysh\Desktop\updk\updk\bin\Debug\updk.exe.config
+C:\Users\panysh\Desktop\updk\updk\bin\Debug\updk.exe
+C:\Users\panysh\Desktop\updk\updk\bin\Debug\updk.pdb
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.csprojAssemblyReference.cache
+C:\Users\panysh\Desktop\updk\updk\obj\Debug\updk.HelpForm.resources
