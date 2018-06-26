@@ -18,7 +18,7 @@ namespace updk
             InitializeComponent();
            // DataBaseNameTextBox.Text = @"Data Source=.;Initial Catalog=UPDK5;Integrated Security=True";
             AuthModeComboBox.SelectedIndex = 0;
-            ServerNameTextBox.Text = ".";
+            ServerNameTextBox.Text = @".\sqlexpress";
             DataBaseNameTextBox.Text = "UPDK5";
         }
 
@@ -41,10 +41,9 @@ namespace updk
             {
                 MessageBox.Show("Нет подключения к базе данных", "Ошибка");
                 return;
-               // Application.Exit();
             }
 
-            MainForm mf = new MainForm(connectionString, beginDate.Value, endDate.Value);
+            MainForm mf = new MainForm(connectionString);//, beginDate.Value, endDate.Value);
            // MainForm mf = new MainForm(@"Data Source=.\SQLEXPRESS;Initial Catalog=UPDK5;Integrated Security=True");
             mf.ShowDialog();
         }

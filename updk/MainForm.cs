@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 namespace updk
@@ -38,7 +33,7 @@ namespace updk
         private void MainForm_Load(object sender, EventArgs e)
         {
             mainDatagridView.AutoGenerateColumns = false;
-            testResultValues = new List<TestResultValues>(); 
+            testResultValues = new List<TestResultValues>();
             string sqlExpression = @"SELECT  Patients.LastName + ' ' + Patients.FirstName + ' ' +
                 Patients.Patronymic  AS FIO, Gender.Name AS Gender, Groups.Name AS [Group], TestResults.Name, 
                 CASE  WHEN  
@@ -53,10 +48,10 @@ namespace updk
                     INNER JOIN Gender ON Gender.ID = Patients.GenderID  
                     INNER JOIN Groups ON GroupID = Groups.ID 
                     INNER JOIN TestPackTypes ON TestPacks.TestPackTypeID = TestPackTypes.ID  
-                    INNER JOIN Tests ON Tests.ID = TestResults.TestID" +
-                String.Format(" WHERE  TestPacks.Date > '{0}' ",  beginDate.ToShortDateString() == endDate.ToShortDateString() ? new DateTime(1900, 1, 1).ToShortDateString() : beginDate.ToShortDateString())
-            +
-                $"AND  TestPacks.Date < '{endDate.ToShortDateString()}'";
+                    INNER JOIN Tests ON Tests.ID = TestResults.TestID ORDER BY TestPacks.Date";// +
+            //    String.Format(" WHERE  TestPacks.Date > '{0}' ",  beginDate.ToShortDateString() == endDate.ToShortDateString() ? new DateTime(1900, 1, 1).ToShortDateString() : beginDate.ToShortDateString())
+            //+
+            //    $"AND  TestPacks.Date < '{endDate.ToShortDateString()}'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -138,8 +133,11 @@ namespace updk
             // Создаём экземпляр листа Excel
             Excel.Worksheet workSheet;
             int rowNumber = 4;
-            workBook = excelApp.Workbooks.Add(@"D:\УПДК\1.xlsx");
+            
+
+            workBook = excelApp.Workbooks.Add(Application.StartupPath + @"\1.xlsx");
             workSheet = (Excel.Worksheet)workBook.Worksheets.get_Item(1);
+
             foreach (var item in names)
             {
 
@@ -164,7 +162,7 @@ namespace updk
                         {
                             if (result >= 10)
                             {
-                                workSheet.Cells[rowNumber, 4] = "норма";
+                                workSheet.Cells[rowNumber, 4] = "Норма";
                             }
                             if (result >= 7 && result < 10)
                             {
@@ -261,31 +259,38 @@ namespace updk
                     var res8 = testResultValues.FirstOrDefault(x => x.FIO == names[i] && x.TestName == "Эмоциональная устойчивость" && x.TestResultName == "Разница количества ошибок с помехой и без помехи (N2 - N1)");
                     if (res1 != null && res2 != null && res3 != null && res4 != null && res5 != null && res6 != null && res7 != null && res8 != null)
                     {
-                        if (double.Parse(res1.TestResultValue) <= 2
-                            && int.Parse(res2.TestResultValue) <= 1
-                            && double.Parse(res3.TestResultValue) * 1000 <= 900 
-                            && int.Parse(res4.TestResultValue) <= 4
-                            && int.Parse(res5.TestResultValue) <= 2
-                            && double.Parse(res6.TestResultValue) * 1000 <= 1250
-                            && double.Parse(res7.TestResultValue) * 1000 <= 350
-                            && int.Parse(res8.TestResultValue) < 2)
+                        try
                         {
-                            workSheet.Cells[rowNumber, 7] = "Хорошо";
+                            if (double.Parse(res1.TestResultValue) <= 2
+                                && int.Parse(res2.TestResultValue) <= 1
+                                && double.Parse(res3.TestResultValue) * 1000 <= 900
+                                && int.Parse(res4.TestResultValue) <= 4
+                                && int.Parse(res5.TestResultValue) <= 2
+                                && double.Parse(res6.TestResultValue) * 1000 <= 1250
+                                && double.Parse(res7.TestResultValue) * 1000 <= 350
+                                && int.Parse(res8.TestResultValue) < 2)
+                            {
+                                workSheet.Cells[rowNumber, 7] = "Хорошо";
+                            }
+                            else if (double.Parse(res1.TestResultValue) <= 2
+                                && int.Parse(res2.TestResultValue) <= 1
+                                && double.Parse(res3.TestResultValue) * 1000 <= 900
+                                && int.Parse(res4.TestResultValue) <= 5
+                                && int.Parse(res5.TestResultValue) <= 3
+                                && double.Parse(res6.TestResultValue) * 1000 <= 1350
+                                && double.Parse(res7.TestResultValue) * 1000 <= 350
+                                && int.Parse(res8.TestResultValue) < 3)
+                            {
+                                workSheet.Cells[rowNumber, 7] = "Удовл";
+                            }
+                            else
+                            {
+                                workSheet.Cells[rowNumber, 7] = "Неуд";
+                            }
                         }
-                        else if (double.Parse(res1.TestResultValue) <= 2
-                            && int.Parse(res2.TestResultValue) <= 1
-                            && double.Parse(res3.TestResultValue) * 1000 <= 900
-                            && int.Parse(res4.TestResultValue) <= 5
-                            && int.Parse(res5.TestResultValue) <= 3
-                            && double.Parse(res6.TestResultValue) * 1000 <= 1350
-                            && double.Parse(res7.TestResultValue) * 1000 <= 350
-                            && int.Parse(res8.TestResultValue) < 3)
+                        catch (Exception e)
                         {
-                            workSheet.Cells[rowNumber, 7] = "Удовл";
-                        }
-                        else
-                        {
-                            workSheet.Cells[rowNumber, 7] = "Неуд";
+
                         }
                     }
                 }
@@ -298,17 +303,24 @@ namespace updk
 
                     if (res1 != null && res2 != null && res3 != null && res4 != null && res5 != null)
                     {
-                        if (double.Parse(res1.TestResultValue) * 1000 <= 600 && int.Parse(res2.TestResultValue) >= 17 && double.Parse(res3.TestResultValue) * 1000 <= 300 && int.Parse(res4.TestResultValue) >= 9 && int.Parse(res5.TestResultValue) <= 3)
+                        try
                         {
-                            workSheet.Cells[rowNumber, 6] = "Хорошо";
+                            if (double.Parse(res1.TestResultValue) * 1000 <= 600 && int.Parse(res2.TestResultValue) >= 17 && double.Parse(res3.TestResultValue) * 1000 <= 300 && int.Parse(res4.TestResultValue) >= 9 && int.Parse(res5.TestResultValue) <= 3)
+                            {
+                                workSheet.Cells[rowNumber, 6] = "Хорошо";
+                            }
+                            else if (double.Parse(res1.TestResultValue) * 1000 <= 600 && int.Parse(res2.TestResultValue) >= 17 && double.Parse(res3.TestResultValue) * 1000 <= 350 && int.Parse(res4.TestResultValue) >= 8 && int.Parse(res5.TestResultValue) <= 4)
+                            {
+                                workSheet.Cells[rowNumber, 6] = "Удовл";
+                            }
+                            else
+                            {
+                                workSheet.Cells[rowNumber, 6] = "Неуд";
+                            }
                         }
-                        else if (double.Parse(res1.TestResultValue) * 1000 <= 600 && int.Parse(res2.TestResultValue) >= 17 && double.Parse(res3.TestResultValue) * 1000 <= 350 && int.Parse(res4.TestResultValue) >= 8 && int.Parse(res5.TestResultValue) <= 4)
+                        catch(Exception e)
                         {
-                            workSheet.Cells[rowNumber, 6] = "Удовл";
-                        }
-                        else
-                        {
-                            workSheet.Cells[rowNumber, 6] = "Неуд";
+
                         }
                     }
 
@@ -320,21 +332,28 @@ namespace updk
 
                     if (res1 != null && res2 != null && res3 != null)
                     {
-                        if (double.Parse(res1.TestResultValue) * 1000 <= 360
-                            && int.Parse(res2.TestResultValue) <= 4
-                            && double.Parse(res3.TestResultValue) * 1000 <= 300)
+                        try
                         {
-                            workSheet.Cells[rowNumber, 8] = "Хорошо";
+                            if (double.Parse(res1.TestResultValue) * 1000 <= 360
+                                && int.Parse(res2.TestResultValue) <= 4
+                                && double.Parse(res3.TestResultValue) * 1000 <= 300)
+                            {
+                                workSheet.Cells[rowNumber, 8] = "Хорошо";
+                            }
+                            else if (double.Parse(res1.TestResultValue) * 1000 <= 360
+                                    && int.Parse(res2.TestResultValue) <= 5
+                                    && double.Parse(res3.TestResultValue) * 1000 <= 350)
+                            {
+                                workSheet.Cells[rowNumber, 8] = "Удовл";
+                            }
+                            else
+                            {
+                                workSheet.Cells[rowNumber, 8] = "Неуд";
+                            }
                         }
-                        else if (double.Parse(res1.TestResultValue) * 1000 <= 360
-                                && int.Parse(res2.TestResultValue) <= 5
-                                && double.Parse(res3.TestResultValue) * 1000 <= 350)
+                        catch(Exception e)
                         {
-                            workSheet.Cells[rowNumber, 8] = "Удовл";
-                        }
-                        else
-                        {
-                            workSheet.Cells[rowNumber, 8] = "Неуд";
+
                         }
                     }
                 }
@@ -344,73 +363,6 @@ namespace updk
             excelApp.Visible = true;
             excelApp.UserControl = true;
 
-            //String targetfile = @"D:\УПДК\rep.xlsx";
-            //if (File.Exists(targetfile))
-            //    File.Delete(targetfile);
-            //File.Copy(@"D:\УПДК\1.xlsx", targetfile);
-
-            //var excelapp = new Excel.Application();
-            //excelapp.Visible = false;
-            ////Получаем набор ссылок на объекты Workbook
-            ////var excelappworkbooks = excelapp.Workbooks;
-            ////Открываем книгу и получаем на нее ссылку
-            //var excelappworkbook = excelapp.Workbooks.Add(@"D:\УПДК\1.xlsx");
-            ////Получаем массив ссылок на листы выбранной книги
-            //var excelsheets = excelappworkbook.Worksheets;
-            ////Получаем ссылку на лист 1
-            //var excelworksheet = (Excel.Worksheet)excelsheets.Item[1];
-
-            //Excel.Range excelcells;
-            //int rowNumber = 2;
-
-            //object _missingObj = System.Reflection.Missing.Value;
-            //List<string> tempNames = new List<string>();
-            //tempNames = testResultValues.Select(x => x.FIO).ToList();
-            //List<string> names = tempNames.Distinct().ToList();
-            //try
-            //{
-            //    foreach (var item in names)
-            //    {
-
-            //        excelcells = (Excel.Range)excelworksheet.Cells[rowNumber, 2];
-            //        excelcells.Value2 = item;
-               
-            //        rowNumber++;
-                   
-            //    }
-
-            //    excelappworkbook.SaveAs(targetfile, Excel.XlFileFormat.xlWorkbookNormal, _missingObj, _missingObj, _missingObj, _missingObj,
-            //            Excel.XlSaveAsAccessMode.xlExclusive, _missingObj, _missingObj, _missingObj, _missingObj, _missingObj);
-
-
-
-            //}
-            //catch (Exception e)
-            //{
-
-            //}
-            //finally
-            //{
-
-            //    excelworksheet = null;
-            //    excelsheets = null;
-            //    try
-            //    {// Тут уж простите за заплатку, выпадало исключение, если файл с таким именем существует и пользователь откажется перезаписывать его
-            //     // Не знаю почему, времени нет разбираться.
-            //     //excelappworkbook.Save();
-            //    }
-            //    catch { }
-
-            //    excelappworkbook.Close(false, _missingObj, _missingObj);// Закрываем книгу
-            //                                                            //excelAppWorkbooks = excelApp.Workbooks;     // Далее проверяем есть ли ещё другие открытые книги, ведь во время работы нашей программы пользователь мог открыть другую книгу
-            //                                                            //if (excelAppWorkbooks.Count == 0)
-            //    excelapp.Quit();            // Если нет то закрываем приложение
-            //    excelappworkbook = null;        // Продолжаем обнулять ссылки
-            //                                    //excelAppWorkbooks = null;
-            //    excelapp = null;
-            //    GC.Collect();
-
-            //}
 
 
         }

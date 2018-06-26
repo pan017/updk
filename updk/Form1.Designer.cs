@@ -39,23 +39,19 @@
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.beginDate = new System.Windows.Forms.DateTimePicker();
-            this.endDate = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DataBaseNameTextBox
             // 
-            this.DataBaseNameTextBox.Location = new System.Drawing.Point(15, 81);
+            this.DataBaseNameTextBox.Location = new System.Drawing.Point(12, 29);
             this.DataBaseNameTextBox.Name = "DataBaseNameTextBox";
             this.DataBaseNameTextBox.Size = new System.Drawing.Size(202, 20);
             this.DataBaseNameTextBox.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(117, 248);
+            this.button1.Location = new System.Drawing.Point(114, 196);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 31);
             this.button1.TabIndex = 1;
@@ -65,7 +61,7 @@
             // 
             // ServerNameTextBox
             // 
-            this.ServerNameTextBox.Location = new System.Drawing.Point(15, 127);
+            this.ServerNameTextBox.Location = new System.Drawing.Point(12, 75);
             this.ServerNameTextBox.Name = "ServerNameTextBox";
             this.ServerNameTextBox.Size = new System.Drawing.Size(202, 20);
             this.ServerNameTextBox.TabIndex = 2;
@@ -73,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 65);
+            this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 3;
@@ -82,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 111);
+            this.label2.Location = new System.Drawing.Point(12, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 4;
@@ -95,7 +91,7 @@
             this.AuthModeComboBox.Items.AddRange(new object[] {
             "Windows авторизация",
             "SQL авторизация"});
-            this.AuthModeComboBox.Location = new System.Drawing.Point(15, 169);
+            this.AuthModeComboBox.Location = new System.Drawing.Point(12, 117);
             this.AuthModeComboBox.Name = "AuthModeComboBox";
             this.AuthModeComboBox.Size = new System.Drawing.Size(202, 21);
             this.AuthModeComboBox.TabIndex = 5;
@@ -104,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 153);
+            this.label3.Location = new System.Drawing.Point(12, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 6;
@@ -112,14 +108,14 @@
             // 
             // LoginTextBox
             // 
-            this.LoginTextBox.Location = new System.Drawing.Point(63, 196);
+            this.LoginTextBox.Location = new System.Drawing.Point(60, 144);
             this.LoginTextBox.Name = "LoginTextBox";
             this.LoginTextBox.Size = new System.Drawing.Size(154, 20);
             this.LoginTextBox.TabIndex = 7;
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(63, 222);
+            this.PasswordTextBox.Location = new System.Drawing.Point(60, 170);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(154, 20);
             this.PasswordTextBox.TabIndex = 8;
@@ -127,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 199);
+            this.label4.Location = new System.Drawing.Point(16, 147);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 9;
@@ -136,47 +132,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 225);
+            this.label5.Location = new System.Drawing.Point(9, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Пароль";
             // 
-            // beginDate
-            // 
-            this.beginDate.Location = new System.Drawing.Point(43, 15);
-            this.beginDate.Name = "beginDate";
-            this.beginDate.Size = new System.Drawing.Size(174, 20);
-            this.beginDate.TabIndex = 11;
-            // 
-            // endDate
-            // 
-            this.endDate.Location = new System.Drawing.Point(43, 43);
-            this.endDate.Name = "endDate";
-            this.endDate.Size = new System.Drawing.Size(174, 20);
-            this.endDate.TabIndex = 12;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "С";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(21, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "По";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 256);
+            this.button2.Location = new System.Drawing.Point(9, 204);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
@@ -188,12 +152,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 292);
+            this.ClientSize = new System.Drawing.Size(234, 245);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.endDate);
-            this.Controls.Add(this.beginDate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.PasswordTextBox);
@@ -226,10 +186,6 @@
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker beginDate;
-        private System.Windows.Forms.DateTimePicker endDate;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button2;
     }
 }
